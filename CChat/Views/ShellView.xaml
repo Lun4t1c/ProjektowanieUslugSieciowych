@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CChatClient.Views"
         mc:Ignorable="d"
-        Title="ShellView" Height="450" Width="800">
+        Title="CChat" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            
+        </Grid.RowDefinitions>
+
+        <local:SidenavView></local:SidenavView>
     </Grid>
 </Window>
