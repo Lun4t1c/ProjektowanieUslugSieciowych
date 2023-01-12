@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CChatClientGUI.ViewModels
 {
-    internal class SidenavViewModel : Screen
+    internal class ChatViewModel : Screen
     {
         #region Properties
 
@@ -15,7 +15,7 @@ namespace CChatClientGUI.ViewModels
 
 
         #region Constructor
-        public SidenavViewModel()
+        public ChatViewModel()
         {
 
         }
@@ -23,11 +23,6 @@ namespace CChatClientGUI.ViewModels
 
 
         #region Methods
-
-        #endregion
-
-
-        #region Button clicks
 
         #endregion
     }

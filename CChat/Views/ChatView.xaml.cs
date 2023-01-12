@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace CChatClientGUI.Views
 {
     /// <summary>
-    /// Interaction logic for SidenavView.xaml
+    /// Interaction logic for ChatView.xaml
     /// </summary>
-    public partial class SidenavView : UserControl
+    public partial class ChatView : UserControl
     {
-        public SidenavView()
+        public ChatView()
         {
             InitializeComponent();
         }

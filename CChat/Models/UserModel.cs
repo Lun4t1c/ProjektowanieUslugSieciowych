@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CChatClient.Models
+namespace CChatClientGUI.Models
 {
     internal class UserModel
     {
+        public string Name { get; set; }
     }
 }

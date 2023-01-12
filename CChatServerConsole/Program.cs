@@ -8,7 +8,7 @@ namespace CChatServerConsole
     {
         public static void Main(string[] args)
         {
-            ServerInstance serverInstance = ServerInstance.GetServerInstance();
+            CChatServer.CChatServer serverInstance = CChatServer.CChatServer.GetServerInstance();
             serverInstance.Start();
         }
     }

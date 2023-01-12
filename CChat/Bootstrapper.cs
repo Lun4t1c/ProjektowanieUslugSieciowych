@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Caliburn.Micro;
-using CChatClient.ViewModels;
+using CChatClientGUI.ViewModels;
 
-namespace CChatClient
+namespace CChatClientGUI
 {
     public class Bootstrapper : BootstrapperBase
     {
