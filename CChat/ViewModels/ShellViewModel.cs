@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using CChatClientGUI.Enums;
 using CChatClientGUI.Models;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace CChatClientGUI.ViewModels
         {
             CurrentMessages.Add(new MessageModel() 
             {
-                User = new UserModel() { Name = "TEST" },
+                User = new UserModel() { Name = "TEST", Type = UserType.MODERATOR },
                 Content = "TEST MESSAGE"
             });
         }
@@ -66,11 +67,20 @@ namespace CChatClientGUI.ViewModels
 
         private void CatchMessage(string message)
         {
-            CurrentMessages.Add(new MessageModel()
+            CurrentMessages.Add(DissectMessage(message));
+        }
+
+        private MessageModel DissectMessage(string message)
+        {
+            MessageModel result;
+
+            result = new MessageModel()
             {
-                User = new UserModel() { Name = "USER" },
+                User = new UserModel() { Name = "USER", Type = Enums.UserType.OTHER_USER },
                 Content = message
-            });
+            };
+
+            return result;
         }
         #endregion
 

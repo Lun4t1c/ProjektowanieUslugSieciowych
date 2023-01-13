@@ -12,9 +12,9 @@ namespace CChatServer
         #endregion
 
         #region Properties
-        private static CChatServer _serverInstance = null;
-        private TcpListener _serverSocket = new TcpListener(IPAddress.Loopback, SERVER_PORT);
-        public static Hashtable clientsList = new Hashtable();
+        private static CChatServer _serverInstance { get; set; } = null;
+        //private TcpListener _serverSocket { get; set; } = new TcpListener(IPAddress.Loopback, SERVER_PORT);
+        public static Hashtable clientsList { get; set; } = new Hashtable();
         #endregion
 
 

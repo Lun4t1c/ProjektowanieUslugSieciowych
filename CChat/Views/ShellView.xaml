@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CChatClientGUI.Views"
         mc:Ignorable="d"
-        Title="CChat" Height="450" Width="800">
+        Title="CChat" Height="450" Width="800"
+        Background="#040114"
+        Foreground="#4a37b8">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
@@ -42,7 +44,8 @@
 
                             <TextBlock Text="{Binding User.Name}"/>
                             <TextBlock Text=": "/>
-                            <TextBlock Text="{Binding Content}"/>
+                            <TextBlock Text="{Binding Content}"
+                                       Foreground="Wheat"/>
 
                         </StackPanel>
                     </DataTemplate>

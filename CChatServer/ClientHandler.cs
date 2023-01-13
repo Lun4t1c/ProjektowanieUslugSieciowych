@@ -10,15 +10,15 @@ namespace CChatServer
 {
     public class ClientHandler
     {
-        TcpClient clientSocket;
+        TcpClient ClientSocket;
         string clNo;
-        Hashtable clientsList;
+        Hashtable ClientsList;
 
         public void startClient(TcpClient inClientSocket, string clineNo, Hashtable cList)
         {
-            this.clientSocket = inClientSocket;
+            this.ClientSocket = inClientSocket;
             this.clNo = clineNo;
-            this.clientsList = cList;
+            this.ClientsList = cList;
             Thread ctThread = new Thread(doChat);
             ctThread.Start();
         }
@@ -39,8 +39,8 @@ namespace CChatServer
                 try
                 {
                     requestCount = requestCount + 1;
-                    NetworkStream networkStream = clientSocket.GetStream();
-                    networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
+                    NetworkStream networkStream = ClientSocket.GetStream();
+                    networkStream.Read(bytesFrom, 0, (int)ClientSocket.ReceiveBufferSize);
                     dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
                     dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
                     Console.WriteLine("From client - " + clNo + " : " + dataFromClient);
