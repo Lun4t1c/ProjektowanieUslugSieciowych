@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CChatClientGUI.Enums
+namespace CChat.Enums
 {
-    internal enum UserType
+    public enum UserType
     {
         YOU,
         OTHER_USER,
-        MODERATOR
+        MODERATOR,
+        SYSTEM
     }
 }

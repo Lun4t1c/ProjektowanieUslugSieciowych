@@ -5,6 +5,12 @@ namespace CChat
 {
     public class CChatClient
     {
+        #region Config
+        public const string MESSAGE_SEPARATOR = ">|<";
+        public const char MESSAGE_SIGNOFF = '$';
+        #endregion
+
+
         #region Properties
         public bool IsActive { get; set; } = false;
         TcpClient clientSocket;
@@ -44,7 +50,13 @@ namespace CChat
 
         public void Start()
         {
-            PassMessage("Starting client...");
+            PassMessage(
+                $"system{MESSAGE_SEPARATOR}" +
+                $"system{MESSAGE_SEPARATOR}" +
+                $"Starting client...{MESSAGE_SEPARATOR}" +
+                $"{MESSAGE_SIGNOFF}"
+            );
+
             IsActive = true;
             while (true)
             {

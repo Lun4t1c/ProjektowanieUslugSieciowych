@@ -4,10 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CChatClientGUI.Views"
+        xmlns:vcs="clr-namespace:CChatClientGUI.ValueConverters"
         mc:Ignorable="d"
         Title="CChat" Height="450" Width="800"
         Background="#040114"
         Foreground="#4a37b8">
+    <Window.Resources>
+        <vcs:UserTypeToColorConverter x:Key="UserTypeToColorConverter"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
@@ -42,7 +47,8 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
 
-                            <TextBlock Text="{Binding User.Name}"/>
+                            <TextBlock Text="{Binding User.Name}"
+                                       Foreground="{Binding User.Type, Converter={StaticResource UserTypeToColorConverter}}"/>
                             <TextBlock Text=": "/>
                             <TextBlock Text="{Binding Content}"
                                        Foreground="Wheat"/>

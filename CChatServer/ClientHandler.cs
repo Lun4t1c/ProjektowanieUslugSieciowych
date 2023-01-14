@@ -11,13 +11,15 @@ namespace CChatServer
     public class ClientHandler
     {
         TcpClient ClientSocket;
-        string clNo;
+        string UserName;
+        string UserType;
         Hashtable ClientsList;
 
-        public void startClient(TcpClient inClientSocket, string clineNo, Hashtable cList)
+        public void startClient(TcpClient inClientSocket, string userName, string userType, Hashtable cList)
         {
             this.ClientSocket = inClientSocket;
-            this.clNo = clineNo;
+            this.UserName = userName;
+            this.UserType = userType;
             this.ClientsList = cList;
             Thread ctThread = new Thread(doChat);
             ctThread.Start();
@@ -33,8 +35,8 @@ namespace CChatServer
             string rCount = null;
             requestCount = 0;
 
-            Console.WriteLine(dataFromClient + " has joined chat room");
-            while ((true))
+            Console.WriteLine(dataFromClient + " has joined server");
+            while (true)
             {
                 try
                 {
@@ -43,10 +45,11 @@ namespace CChatServer
                     networkStream.Read(bytesFrom, 0, (int)ClientSocket.ReceiveBufferSize);
                     dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
                     dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
-                    Console.WriteLine("From client - " + clNo + " : " + dataFromClient);
+                    Console.WriteLine("From client - " + UserName + " : " + dataFromClient);
                     rCount = Convert.ToString(requestCount);
 
-                    CChatServer.Broadcast($"{dataFromClient} has joined chat");
+                    Console.WriteLine($"Broadcasting: ({UserName} : user : {dataFromClient})");
+                    CChatServer.Broadcast(UserName, UserType, dataFromClient);
                 }
                 catch (Exception ex)
                 {

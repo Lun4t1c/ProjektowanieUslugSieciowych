@@ -9,6 +9,8 @@ namespace CChatServer
     {
         #region Config
         const int SERVER_PORT = 3243;
+        const string MESSAGE_SEPARATOR = ">|<";
+        const char MESSAGE_SIGNOFF = '$';
         #endregion
 
         #region Properties
@@ -63,15 +65,15 @@ namespace CChatServer
 
                 clientsList.Add(dataFromClient, clientSocket);
 
-                Broadcast(dataFromClient + " has joined ");
+                Broadcast("system", "system", dataFromClient + " has joined");
 
                 Console.WriteLine(dataFromClient + " has joined chat room");
                 ClientHandler client = new ClientHandler();
-                client.startClient(clientSocket, dataFromClient, clientsList);
+                client.startClient(clientSocket, dataFromClient, "user", clientsList);
             }
         }
 
-        public static void Broadcast(string message)
+        public static void Broadcast(string user, string user_type, string message)
         {
             foreach (DictionaryEntry Item in clientsList)
             {
@@ -80,12 +82,18 @@ namespace CChatServer
                 NetworkStream broadcastStream = broadcastSocket.GetStream();
                 byte[] broadcastBytes = null;
 
-                broadcastBytes = Encoding.ASCII.GetBytes(message);
+                string broadcastString = 
+                    $"{user}{MESSAGE_SEPARATOR}" +
+                    $"{user_type}{MESSAGE_SEPARATOR}" +
+                    $"{message}{MESSAGE_SEPARATOR}" +
+                    $"{MESSAGE_SIGNOFF}";
+
+                broadcastBytes = Encoding.ASCII.GetBytes(broadcastString);
 
                 broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
                 broadcastStream.Flush();
             }
-        }  //end broadcast function
+        }
         #endregion
 
 

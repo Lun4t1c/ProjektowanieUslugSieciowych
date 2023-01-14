@@ -1,13 +1,13 @@
-﻿using CChatClientGUI.Enums;
+﻿using CChat.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CChatClientGUI.Models
+namespace CChat.Models
 {
-    internal class UserModel
+    public class UserModel
     {
         public string Name { get; set; }
         public UserType Type { get; set; }

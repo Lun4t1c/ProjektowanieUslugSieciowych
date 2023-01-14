@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CChatClientGUI.Models
+namespace CChat.Models
 {
-    internal class MessageModel
+    public class MessageModel
     {
         public int Id { get; set; } = 0;
         public UserModel User { get; set; }
