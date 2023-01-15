@@ -50,6 +50,7 @@ namespace CChatServer
 
                     Console.WriteLine($"Broadcasting: ({UserName} : user : {dataFromClient})");
                     CChatServer.Broadcast(UserName, UserType, dataFromClient);
+                    CChatServer.StoredMessages.Add(CChatServer.ConstructPayload(UserName, UserType, dataFromClient));
                 }
                 catch (Exception ex)
                 {

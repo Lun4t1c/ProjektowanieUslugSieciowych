@@ -15,8 +15,8 @@ namespace CChatServer
 
         #region Properties
         private static CChatServer _serverInstance { get; set; } = null;
-        //private TcpListener _serverSocket { get; set; } = new TcpListener(IPAddress.Loopback, SERVER_PORT);
         public static Hashtable clientsList { get; set; } = new Hashtable();
+        public static List<string> StoredMessages { get; set; } = new List<string>();
         #endregion
 
 
@@ -70,11 +70,16 @@ namespace CChatServer
                 Console.WriteLine(dataFromClient + " has joined chat room");
                 ClientHandler client = new ClientHandler();
                 client.startClient(clientSocket, dataFromClient, "user", clientsList);
+
+                foreach (string payload in StoredMessages)
+                    _sendPayloadToUser(clientSocket, payload);
             }
         }
 
         public static void Broadcast(string user, string user_type, string message)
         {
+            string broadcastString = ConstructPayload(user, user_type, message);
+
             foreach (DictionaryEntry Item in clientsList)
             {
                 TcpClient broadcastSocket;
@@ -82,23 +87,40 @@ namespace CChatServer
                 NetworkStream broadcastStream = broadcastSocket.GetStream();
                 byte[] broadcastBytes = null;
 
-                string broadcastString = 
-                    $"{user}{MESSAGE_SEPARATOR}" +
-                    $"{user_type}{MESSAGE_SEPARATOR}" +
-                    $"{message}{MESSAGE_SEPARATOR}" +
-                    $"{MESSAGE_SIGNOFF}";
-
                 broadcastBytes = Encoding.ASCII.GetBytes(broadcastString);
 
                 broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
                 broadcastStream.Flush();
             }
         }
+
+        public static string ConstructPayload(string user, string user_type, string message)
+        {
+            string result = "";
+
+            result =
+                    $"{user}{MESSAGE_SEPARATOR}" +
+                    $"{user_type}{MESSAGE_SEPARATOR}" +
+                    $"{message}{MESSAGE_SEPARATOR}" +
+                    $"{MESSAGE_SIGNOFF}"
+            ;
+
+            return result;
+        }
         #endregion
 
 
         #region Private Methods
+        private void _sendPayloadToUser(TcpClient tcpClient, string payload)
+        {
+            NetworkStream broadcastStream = tcpClient.GetStream();
+            byte[] broadcastBytes = null;
 
+            broadcastBytes = Encoding.ASCII.GetBytes(payload);
+
+            broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
+            broadcastStream.Flush();
+        }
         #endregion
     }
 }
