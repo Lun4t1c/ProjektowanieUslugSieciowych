@@ -37,11 +37,7 @@ namespace CChatClientGUI.ViewModels
         #region Constructor
         public ShellViewModel()
         {
-            CurrentMessages.Add(new MessageModel() 
-            {
-                User = new UserModel() { Name = "TEST", Type = UserType.MODERATOR },
-                Content = "TEST MESSAGE"
-            });
+
         }
         #endregion
 
